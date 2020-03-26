@@ -422,7 +422,7 @@ public:
 		testopen.readfile();
 	}
 
-	void encryptTxt_test(string inputfile, string outputfile, string key, string XOR_k) {
+	void encryptTxt_test(string inputfile, string outputfile, string key) {
 		// variables
 		vector<string> input_txt;
 
@@ -436,19 +436,16 @@ public:
 		encryptedfile.makefile();
 
 		//we now have the values, encrypt
-		algs bit_w;
 		encrypt file;
 		string temp = "";
-		string second_temp = "";
 		for (int i = 0; i < input_txt.size(); i++) {
 			temp = file.enc(key, input_txt[i]);
-			second_temp = bit_w.XOR_base(XOR_k, temp);
-			encryptedfile.writefile(second_temp);
+			encryptedfile.writefile(temp);
 			cout << "line: " << temp << endl;
 		}
 	}
 
-	void decryptTxt_test(string inputfile, string outputfile, string key, string XOR_k) {
+	void decryptTxt_test(string inputfile, string outputfile, string key) {
 		// variables
 		vector<string> input_txt;
 
@@ -462,14 +459,11 @@ public:
 		encryptedfile.makefile();
 
 		//we now have the values, encrypt
-		algs bitwise;
 		encrypt file;
 		string temp = "";
-		string secondary_temp = "";
 		for (int i = 0; i < input_txt.size(); i++) {
 			temp = file.decr(key, input_txt[i]);
-			secondary_temp = bitwise.XOR_base(XOR_k, temp);
-			encryptedfile.writefile(secondary_temp);
+			encryptedfile.writefile(temp);
 			cout << "line: " << temp << endl;
 		}
 	}
@@ -484,9 +478,9 @@ int main() {
 	string key2 = "thisisakeyyes";
 
 	assemblers test;
-	test.encryptTxt_test("research", "resencrypted", key, key2);
+	test.encryptTxt_test("research", "resencrypted", key);
 
-	test.decryptTxt_test("resencrypted", "resdecrypted", key, key2);
+	test.decryptTxt_test("resencrypted", "resdecrypted", key);
 
 	return 0;
 }
